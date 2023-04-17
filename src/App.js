@@ -3,8 +3,28 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import { useEffect } from "react";
+import { useAuth } from "./context/GlobalContext";
+import { auth } from "./firebase";
 
 function App() {
+  const { dispatch } = useAuth();
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+  }, []);
+
   return (
     <div className="App">
       <Header />

@@ -4,8 +4,17 @@ import Logo from "../images/header-logo.png";
 import searchIcon from "../images/icons/searchIcon.png";
 import shoppingCart from "../images/icons/shopping-cart.png";
 import "./styles/Header.css";
+import { useAuth } from "../context/GlobalContext";
+import { auth } from "../firebase";
 
 export default function Header() {
+  const { user } = useAuth();
+
+  const signOutHandler = () => {
+    auth.signOut();
+  };
+
+  console.log(user?.email);
   return (
     <div className="header">
       <Link to="/">
@@ -16,10 +25,14 @@ export default function Header() {
         <img className="header-searchIcon" src={searchIcon} alt="search-icon" />
       </div>
       <div className="header-nav">
-        <Link to="/login">
+        <Link to={!user && "/login"}>
           <div className="header-option">
-            <span className="header-optionLineOne">Hello Geust</span>
-            <span className="header-optionLineTwo">Sign In</span>
+            <span className="header-optionLineOne">
+              Hello {user ? `${user.email}` : "Geust"}
+            </span>
+            <span className="header-optionLineTwo" onClick={signOutHandler}>
+              {user ? "Sign Out" : " Sign In "}
+            </span>
           </div>
         </Link>
         <Link to="/orders">
