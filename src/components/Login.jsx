@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Logo from "../images//login-logo.png";
 import { Link } from "react-router-dom";
-import "./styles/Login.css";
+import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,

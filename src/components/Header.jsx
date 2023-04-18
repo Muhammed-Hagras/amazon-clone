@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../images/header-logo.png";
 import searchIcon from "../images/icons/searchIcon.png";
 import shoppingCart from "../images/icons/shopping-cart.png";
-import "./styles/Header.css";
+import "../styles/Header.css";
 import { useAuth } from "../context/GlobalContext";
 import { auth } from "../firebase";
 
@@ -14,7 +14,6 @@ export default function Header() {
     auth.signOut();
   };
 
-  console.log(user?.email);
   return (
     <div className="header">
       <Link to="/">
