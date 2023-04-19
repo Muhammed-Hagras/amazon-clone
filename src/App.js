@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useAuth } from "./context/GlobalContext";
 import { auth } from "./firebase";
 import Checkout from "./components/Checkout";
+import Payment from "./components/Payment";
 
 function App() {
   const { dispatch } = useAuth();
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </div>
