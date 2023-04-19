@@ -8,7 +8,7 @@ import { useAuth } from "../context/GlobalContext";
 import { auth } from "../firebase";
 
 export default function Header() {
-  const { user } = useAuth();
+  const { user, cart } = useAuth();
 
   const signOutHandler = () => {
     auth.signOut();
@@ -46,8 +46,10 @@ export default function Header() {
         </div>
         <Link to="/checkout">
           <div className="header-optionBasket">
-            <img src={shoppingCart} />
-            <span className="header-optionLineTwo header-basketCount"></span>
+            <img src={shoppingCart} alt="" />
+            <span className="header-optionLineTwo header-basketCount">
+              {cart?.length}
+            </span>
           </div>
         </Link>
       </div>

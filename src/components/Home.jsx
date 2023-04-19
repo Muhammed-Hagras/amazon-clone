@@ -16,8 +16,6 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  console.log(products);
-
   return (
     <div className="home">
       <div className="home-container">
@@ -26,11 +24,11 @@ export default function Home() {
         </div>
         <div className="home-row">
           <Product
-            id={products[1]?.id}
-            img={products[1]?.image}
-            price={products[1]?.price}
-            title={products[1]?.title}
-            desc={products[1]?.description}
+            id={products[11]?.id}
+            img={products[11]?.image}
+            price={products[11]?.price}
+            title={products[11]?.title}
+            desc={products[11]?.description}
             rating={5}
           />
           <Product

@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import { useEffect } from "react";
 import { useAuth } from "./context/GlobalContext";
 import { auth } from "./firebase";
+import Checkout from "./components/Checkout";
 
 function App() {
   const { dispatch } = useAuth();
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </div>
