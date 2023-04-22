@@ -15,7 +15,7 @@ import { loadStripe } from "@stripe/stripe-js";
 function App() {
   const { dispatch } = useAuth();
   const stripePromise = loadStripe(
-    "pk_test_51M8qBGGgMfG9lrQtwQD96xCOGZUGCke60ampxG6veTlOT3bRrKATseNAiOzXTUNYB7GyXIDHzsgSTqkcMXgnHCXL00jKa12Jue"
+    "pk_test_51M6dxKGBkGQ90p3YHagPH71xVWudMCfQzgYjSkTfhefWbsCDQ7UcHw2ankcHJ07a6x4SByTZ2g4OLddHhbfqsTIY00U2EtnVJ5"
   );
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {

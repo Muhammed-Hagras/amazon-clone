@@ -10,6 +10,7 @@ export default function CheckoutProduct({
   desc,
   price,
   rating,
+  hiddenButton,
 }) {
   const { dispatch } = useAuth();
   const removeFromCartHandler = () => {
@@ -36,7 +37,9 @@ export default function CheckoutProduct({
               </span>
             ))}
         </span>
-        <button onClick={removeFromCartHandler}>Remove from cart</button>
+        {!hiddenButton && (
+          <button onClick={removeFromCartHandler}>Remove from cart</button>
+        )}
       </div>
     </div>
   );

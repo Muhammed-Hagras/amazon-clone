@@ -7,6 +7,8 @@ import CurrencyFormat from "react-currency-format";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "../styles/Payment.css";
 import axios from "../axios";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function Payment() {
   const { cart, user, dispatch } = useAuth();
@@ -22,18 +24,18 @@ export default function Payment() {
   useEffect(() => {
     const getClientSecret = async () => {
       const res = await axios.post(
-        `/payments/create?total=${getCartTotal(cart) * 100}`
+        `/payment/create?total=${getCartTotal(cart) * 100}`
       );
       setClientSecret(res.data.clientSecret);
       return res;
     };
-
     getClientSecret();
   }, [cart]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setProcessing(true);
+    //confirm payment and setting cardElement
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -41,6 +43,13 @@ export default function Payment() {
         },
       })
       .then(({ paymentIntent }) => {
+        // Create orders
+        const ref = doc(db, "users", user?.uid, "orders", paymentIntent.id);
+        setDoc(ref, {
+          cart: cart,
+          amount: paymentIntent.amount,
+          created: paymentIntent.created,
+        });
         setSucceeded(true);
         setError(null);
         setProcessing(false);
@@ -52,7 +61,6 @@ export default function Payment() {
   };
 
   const handleChange = async (e) => {
-    e.preventDefault();
     setDisabled(e.empty);
     setError(error ? error.message : "");
   };
@@ -104,10 +112,15 @@ export default function Payment() {
                   prefix={"$"}
                 />
               </div>
-              <button type="submit" className="buy-btn">
-                <span>Buy Now</span>
+              <button
+                className="buy-btn"
+                type="submit"
+                disabled={processing || disabled || succeeded}
+              >
+                <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
               </button>
             </div>
+            {error && <div>{error}</div>}
           </form>
         </div>
       </div>
