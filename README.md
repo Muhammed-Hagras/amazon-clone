@@ -1,8 +1,12 @@
 A simple store/E-commerce website as like amazon clone using reactjs
 
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Tools: 
+  * React.js.
+  * shortid.
+  * stripe.
+  
+
 
 ## Available Scripts
 
